@@ -21,6 +21,10 @@ type Bank struct{
 	Accounts map[int]Account
 }
 func (b *Bank) Create(a *Account,reply *string) error{
+	_, ok := b.Accounts[a.AccountNumber]
+    if ok {
+        return errors.New("Account already exists! Cannot overwrite.")
+    }
 	a.Balance=0 
 	b.Accounts[a.AccountNumber]=*a
 	*reply="Account Created Successfully"
